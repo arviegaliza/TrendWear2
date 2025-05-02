@@ -1,0 +1,942 @@
+/* Importing Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+
+/* ==============================
+    General Layout & Wrapper
+================================= */
+
+/* Wrapper for centering the form */
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-image: url('./assets/background.jpeg');  
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+   
+}
+
+
+/* Main login container with split layout */
+.login-container {
+    display: flex;
+    justify-content: space-between;  /* Space out left and right sides */
+    align-items: center;
+    height: 100vh;
+
+    padding: 20px;
+}
+/* Fade-out animation */
+.fade-out {
+    animation: fadeOut 0.1s forwards;
+  }
+  
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  
+  /* Optional: Smooth transition for the whole page */
+  .login-container {
+    transition: opacity 1s ease-in-out;
+  }
+  
+
+/* Left side container for animation */
+.left-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Right side container for form */
+.right-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+/* Table for T-shirt animation */
+.tshirt-animation-table {
+    width: 75%;
+    text-align: center;
+    background-color: transparent; /* Remove the white background from the table */
+        /* Initial state for animation */
+        opacity: 0; /* Start invisible */
+        animation: fadeIn 2s ease-out forwards; /* Applying fade-in animation */
+}
+/* Fade-in animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0; /* Start invisible */
+    }
+    100% {
+        opacity: 1; /* Fully visible */
+    }
+}
+
+/* T-shirt animation styling */
+.tshirt-animation {
+    width: 75%;  /* Adjust the size of the T-shirt animation */
+    height: auto;
+    opacity: 1; /* Always fully visible */
+    
+    /* Applying 3D animation */
+    animation: bounce3d 2s ease-out infinite; /* Apply continuous 3D bounce animation */
+    transform-style: preserve-3d; /* Ensures 3D transformations work properly */
+}
+
+/* 3D Bounce animation */
+@keyframes bounce3d {
+    0% {
+        opacity: 1;
+        transform: translateY(0) rotateY(0deg); /* Normal position with no rotation */
+    }
+    25% {
+        opacity: 1;
+        transform: translateY(-15px) rotateY(15deg); /* Bounce up and rotate slightly */
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(0) rotateY(0deg); /* Back to normal position, no rotation */
+    }
+    75% {
+        opacity: 1;
+        transform: translateY(-10px) rotateY(-15deg); /* Bounce up again with reverse rotation */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotateY(0deg); /* Back to normal position, no rotation */
+    }
+}
+
+
+/* ==============================
+    Typography & Title Styles
+================================= */
+
+/* TrendWear Title with Text Shadow */
+.trendwear-title {
+    font-family: 'Pacifico', cursive; /* Stylish cursive font */
+    font-size: 28px;
+    text-align: center;
+    color: black; /* Primary color */
+    margin-bottom: 15px;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); /* Soft shadow effect */
+    position: relative;
+}
+/* Tagline Styling */
+.tagline {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 18px;
+    text-align: center;
+    color: #333;
+    margin-top: 10px;
+    font-weight: normal;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow for the tagline */
+}
+
+
+/* Line below the TrendWear title */
+.trendwear-title::after {
+    content: "";
+    display: block;
+    width: 60%; /* Line width */
+    height: 3px; /* Line thickness */
+    background-color: black; /* Same color as text */
+    margin: 8px auto 0; /* Centering the line */
+    border-radius: 5px; /* Rounded edges */
+}
+
+/* Signup Title */
+.signup-title {
+    font-family: 'Pacifico', cursive; /* Beautiful cursive font */
+    font-size: 28px;
+    text-align: center;
+    color: black; /* Primary color */
+    margin-bottom: 15px;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); /* Soft shadow effect */
+    position: relative;
+}
+
+/* Line below the Signup title */
+.signup-title::after {
+    content: "";
+    display: block;
+    width: 60%; /* Line width */
+    height: 3px; /* Line thickness */
+    background-color: black; /* Same color as text */
+    margin: 8px auto 0; /* Centering the line */
+    border-radius: 5px; /* Rounded edges */
+}
+
+
+
+/* ==============================
+    Form & Input Styling
+================================= */
+
+/* Main form container */
+.login-form {
+    background: rgba(255, 255, 255, 0.1); /* Transparent White */
+    backdrop-filter: blur(10px); /* Frosted Glass Effect */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.2); /* Soft glowing shadow */
+    width: 100%;
+    max-width: 400px;
+    min-width: 280px;
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Add hover glow effect */
+.login-form:hover {
+    box-shadow: 0px 4px 20px rgba(255, 255, 255, 0.4);
+    transform: scale(1.02);
+}
+
+
+/* Input group container */
+.login-form .input-group {
+    position: relative;
+    width: 100%;
+}
+
+/* Input fields */
+.login-form .form-control {
+    flex: 1;
+    padding: 12px 10px 12px 40px; /* Space for icon */
+    font-size: 16px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    width: 100%; /* Ensures full width */
+}
+
+/* Input focus effect */
+.login-form .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+/* Floating label style */
+.login-form .floating-label {
+    position: absolute;
+    left: 40px; /* Aligns label with input text */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #6c757d;
+    pointer-events: none;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Move label up when input is focused or filled */
+.login-form .form-control:focus ~ .floating-label,
+.login-form .form-control:not(:placeholder-shown) ~ .floating-label {
+    top: 5px;
+    font-size: 12px;
+    color: #007bff;
+    background: none;
+    padding: 0 5px;
+}
+
+/* Input icons */
+.login-form .input-group .input-group-text {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #495057;
+    z-index: 10;
+}
+
+
+/* ==============================
+    Button Styling
+================================= */
+
+/* General button styles */
+.login-form .btn {
+    width: 100%;
+    border-radius: 5px;
+}
+
+/* Forgot Password Button */
+.forgot-password-btn {
+    display: block;
+    text-align: center;
+    color: black;
+    background: transparent;
+    border:none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    margin-top: 10px;
+}
+
+
+
+/* Active (when clicked) */
+.forgot-password-btn:active,
+.forgot-password-btn:focus {
+    border: 2px solid white !important;
+    outline: none;
+}
+
+/* Reset Password Button */
+.reset-password-btn {
+    background-color: lightgreen;
+    color: white;
+    border: 2px solid lightgreen;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+    display: block;
+}
+
+/* Hover effect */
+.reset-password-btn:hover {
+    background-color: #90ee90;
+    border-color: #90ee90;
+}
+
+/* Active and Focus state */
+.reset-password-btn:active,
+.reset-password-btn:focus {
+    outline: none;
+    border: 2px solid #90ee90 !important;
+}
+
+/* Custom General Button */
+.custom-btn {
+    background-color: green;
+    color: white;
+    border: 2px solid green;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+    display: block;
+}
+
+/* Hover effect */
+.custom-btn:hover {
+    background-color: #90ee90;
+    border-color: #90ee90;
+}
+
+/* Active and Focus state */
+.custom-btn:active,
+.custom-btn:focus {
+    outline: none;
+    border: 2px solid #90ee90 !important;
+}
+
+
+/* ==============================
+    Responsive Design for Mobile
+================================= */
+
+/* Mobile responsive adjustments */
+@media (max-width: 500px) {
+    .wrapper {
+        padding: 10px;
+    }
+
+    .login-form {
+        max-width: 90%; /* Allows better fit on smaller screens */
+    }
+
+    .login-form .form-control {
+        font-size: 14px; /* Slightly smaller text for better mobile fit */
+    }
+
+    .login-form .floating-label {
+        font-size: 14px; /* Adjust label size on small screens */
+    }
+}
+
+/* Back to login link */
+.back-to-login {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.back-to-login:hover {
+    text-decoration: underline;
+}
+
+/* Error Text Styling */
+.error-text {
+    color: red;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+
+
+/* General styling */
+.home-page {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    background-image: url('./assets/Mainbgdd.jpg');
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+
+/* Popup styling */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+    font-weight: bold;
+    color: black;
+    font-family: "Sigmar", serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    background: transparent;
+    opacity: 1;
+    animation: moveUp 2s ease-in-out forwards;
+}
+
+/* Move popup to the top after appearing */
+@keyframes moveUp {
+    0% {
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    100% {
+        top: 10%;
+        transform: translate(-50%, 0);
+    }
+}
+
+/* Logo Container with 3D Perspective */
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    animation: fadeIn 2s ease-in-out forwards;
+    animation-delay: 3s;
+    perspective: 800px; /* Creates depth effect */
+}
+
+/* Ensure the image inside the logo is visible */
+.logo img {
+    width: 350px; /* Adjust size as needed */
+    height: auto;
+    display: block;
+    animation: edgeSpin 3s linear infinite; /* Edge spinning effect */
+    transform-origin: center; /* Ensures spin happens from center */
+    transform-style: preserve-3d; /* Enables 3D transformations */
+    backface-visibility: hidden; /* Hides the back face */
+    will-change: transform; /* Optimizes rendering */
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Only Edges Rotating Effect */
+@keyframes edgeSpin {
+    0% {
+        transform: rotateY(0deg);
+    }
+    25% {
+        transform: rotateY(10deg); /* Slight edge tilt */
+    }
+    50% {
+        transform: rotateY(0deg); /* Back to normal */
+    }
+    75% {
+        transform: rotateY(-10deg); /* Tilt to other side */
+    }
+    100% {
+        transform: rotateY(0deg); /* Reset */
+    }
+}
+
+/* Webkit Prefix for Edge and Safari */
+@-webkit-keyframes edgeSpin {
+    0% {
+        -webkit-transform: rotateY(0deg);
+    }
+    25% {
+        -webkit-transform: rotateY(10deg);
+    }
+    50% {
+        -webkit-transform: rotateY(0deg);
+    }
+    75% {
+        -webkit-transform: rotateY(-10deg);
+    }
+    100% {
+        -webkit-transform: rotateY(0deg);
+    }
+}
+
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+
+
+/* Footer styling */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);  
+    width: 100%;                  
+    text-align: center;
+    padding: 10px 0;            
+    background-color: #f1f1f1;  
+    border-top: 1px solid #ccc;  
+    box-sizing: border-box;      
+}
+
+/* Footer table styling */
+.footer-table {
+    margin: 0 auto;                
+    width: 100%;                 
+    border-collapse: collapse;    
+}
+
+/* Footer item (table cell) styling */
+.footer-item {
+    padding: 10px 20px;
+    font-size: 0.8em;
+    text-align: center;
+    cursor: pointer;              
+}
+
+/* Icon styling inside footer items */
+.footer-item i {
+    margin-right: 5px;          
+    font-size: 1.0em;              
+}
+
+/* Hover effect on footer items */
+.footer-item:hover {
+    background-color: #f7f7f7;    
+}
+
+/* Optional: Additional styling for mobile responsiveness */
+@media (max-width: 768px) {
+    .footer {
+        width: 100%;             
+        padding: 10px;              
+    }
+
+    .footer-item {
+        padding: 8px;               
+    }
+
+    .footer-item i {
+        font-size: 1.1em;           
+    }
+}
+
+/* Sidebar Styling */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Sidebar is hidden initially */
+    width: 250px;
+    height: 100%;
+    background-color: lightsalmon;
+    color: white;
+    padding-top: 60px;
+    transition: left 0.3s ease-in-out;
+    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Open Sidebar */
+.sidebar.open {
+    left: 0; /* Show sidebar when open */
+}
+
+/* Sidebar Menu */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+}
+
+/* Sidebar Items */
+.sidebar ul li {
+    padding: 12px 20px;
+    width: 100%;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background 0.3s, padding-left 0.3s;
+}
+
+/* Sidebar Hover Effect */
+.sidebar ul li a:hover {
+    background-color: #d66b4d;
+    padding-left: 15px;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 25px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Menu Button */
+.menu-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: none;
+    border: none;
+    font-size: 30px;
+    color:  black;
+    cursor: pointer;
+    z-index: 1100;
+}
+
+/* Icons Styling */
+.sidebar ul li a i {
+    font-size: 20px;
+}
+
+/* Logout Button */
+.logout-container {
+    position: absolute;
+    bottom: 30px; /* Stays at the very bottom */
+    width: 100%;
+    text-align:center;
+}
+.logout-btn {
+    background-color: #d9534f; /* Red Logout Button */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 60%;
+ 
+}
+
+.logout-btn:hover {
+    background-color: #c9302c;
+}
+
+
+.title {
+    font-family: 'Pacifico', cursive; /* Stylish cursive font */
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding-bottom: 10px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  
+.container {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+}
+
+.table-container {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Center the buttons horizontally */
+    margin-bottom: 30px; /* Add spacing from the bottom */
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: 10px; /* Optional: Add spacing between buttons */
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    padding: 100px;
+}
+
+button.casual,
+button.formal,
+button.summer {
+    width: 120px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button.casual {
+    background-color: #ffcc00;
+    color: #333;
+}
+
+button.formal {
+    background-color: #007bff;
+    color: white;
+}
+
+button.summer {
+    background-color: #ff5733;
+    color: white;
+}
+
+button.casual:hover {
+    background-color: #e6b800;
+    transform: scale(1.05);
+}
+
+button.formal:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+button.summer:hover {
+    background-color: #cc4626;
+    transform: scale(1.05);
+}
+
+
+/* Category images */
+.category-image {
+    width: 150px; /* Adjust size */
+    height: 150px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 10px;
+  }
+  
+  /* Table container styles */
+  .table-container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  table {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  button.casual {
+    width: 120px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  button.casual:hover {
+    background-color: #e6b800;
+    transform: scale(1.05);
+  }
+  
+  
+  button {
+    margin-top: 10px;
+  }
+  
+  .shirt-images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 30px;
+  }
+  .category-image {
+    width: 260px;
+    height: 280px;
+    object-fit: cover;
+    margin-bottom: 1px;
+    animation: edgeSpin 3s linear infinite;
+    transform-origin: center;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    will-change: transform;
+    transition: transform 0.3s ease;
+    perspective: 800px;
+  }
+  
+  /* Optional: Add hover scale for extra interaction */
+  .category-image:hover {
+    transform: scale(1.05);
+  }
+  
+  
+  @keyframes edgeSpin {
+    0% {
+      transform: rotateY(0deg);
+    }
+    25% {
+      transform: rotateY(10deg);
+    }
+    50% {
+      transform: rotateY(0deg);
+    }
+    75% {
+      transform: rotateY(-10deg);
+    }
+    100% {
+      transform: rotateY(0deg);
+    }
+  }
+  
+  @-webkit-keyframes edgeSpin {
+    0% {
+      -webkit-transform: rotateY(0deg);
+    }
+    25% {
+      -webkit-transform: rotateY(10deg);
+    }
+    50% {
+      -webkit-transform: rotateY(0deg);
+    }
+    75% {
+      -webkit-transform: rotateY(-10deg);
+    }
+    100% {
+      -webkit-transform: rotateY(0deg);
+    }
+  }
+  
+  .shirt-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+  
+  .shirt-image:hover {
+    transform: scale(1.1);
+  }
+  
+  button {
+    margin-top: 15px;
+    padding: 12px 25px;
+    font-size: 18px;
+    border-radius: 8px;
+  }
+  
+  .category-image {
+    width: 260px;
+    height: 280px;
+    object-fit: cover;
+    margin-bottom: 1px;
+  }
+  .back-btn {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: auto;
+    margin-bottom: 30px;
+    padding: 10px 18px;
+    font-size: 18px;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-btn:hover {
+    background-color: #ddd;
+  }
+  
+  
