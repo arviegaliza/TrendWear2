@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css'; 
+
+// Assets
 import casualImage from './assets/casual/shirt1.png';
 import casualShirt2 from './assets/casual/shirt2.png';
 import casualShirt3 from './assets/casual/shirt3.png';
@@ -30,6 +32,7 @@ function Outfit() {
 
   return (
     <div className="outfit-page">
+      
       {/* Sidebar */}
       <div className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
         <button className="close-btn" onClick={() => setSidebarOpen(false)}>
@@ -54,11 +57,11 @@ function Outfit() {
         <i className="fas fa-bars"></i>
       </button>
 
-      {/* Outfit Content */}
+      {/* Content */}
       <div className="container">
         <div className="title">Outfit</div>
 
-        {/* Show categories if none is selected */}
+        {/* Show categories if none selected */}
         {selectedCategory === null && (
           <div className="table-container">
             <table>
@@ -88,48 +91,72 @@ function Outfit() {
           </div>
         )}
 
-      {/* Back Button */}
-            {selectedCategory && (
-               <button className="back-btn" onClick={() => setSelectedCategory(null)}>
-                 <i className="fas fa-arrow-left"></i>
-                </button>
-              )}
+        {/* Back Button */}
+        {selectedCategory && (
+          <button className="back-btn" onClick={() => setSelectedCategory(null)}>
+            <i className="fas fa-arrow-left"></i>
+          </button>
+        )}
 
-
-
-        {/* Shirt displays */}
+        {/* Casual Shirts */}
         {selectedCategory === 'casual' && (
           <div className="shirts-display">
             <h3>Casual Shirts</h3>
             <div className="shirt-images">
-              <img src={casualImage} alt="Casual Shirt 1" className="shirt-image" />
-              <img src={casualShirt2} alt="Casual Shirt 2" className="shirt-image" />
-              <img src={casualShirt3} alt="Casual Shirt 3" className="shirt-image" />
-              <img src={casualShirt4} alt="Casual Shirt 4" className="shirt-image" />
+              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
+                <img src={casualImage} alt="Casual Shirt 1" className="shirt-image" />
+              </a>
+              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
+                <img src={casualShirt2} alt="Casual Shirt 2" className="shirt-image" />
+              </a>
+              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
+                <img src={casualShirt3} alt="Casual Shirt 3" className="shirt-image" />
+              </a>
+              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
+                <img src={casualShirt4} alt="Casual Shirt 4" className="shirt-image" />
+              </a>
             </div>
           </div>
         )}
 
+        {/* Formal Shirts */}
         {selectedCategory === 'formal' && (
           <div className="shirts-display">
             <h3>Formal Shirts</h3>
             <div className="shirt-images">
-              <img src={formalImage1} alt="Formal Shirt 1" className="shirt-image" />
-              <img src={formalImage2} alt="Formal Shirt 2" className="shirt-image" />
-              <img src={formalImage3} alt="Formal Shirt 3" className="shirt-image" />
-              <img src={formalImage4} alt="Formal Shirt 4" className="shirt-image" />
+              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
+                <img src={formalImage1} alt="Formal Shirt 1" className="shirt-image" />
+              </a>
+              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
+                <img src={formalImage2} alt="Formal Shirt 2" className="shirt-image" />
+              </a>
+              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
+                <img src={formalImage3} alt="Formal Shirt 3" className="shirt-image" />
+              </a>
+              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
+                <img src={formalImage4} alt="Formal Shirt 4" className="shirt-image" />
+              </a>
             </div>
           </div>
         )}
 
+        {/* Summer Shirts */}
         {selectedCategory === 'summer' && (
           <div className="shirts-display">
             <h3>Summer Shirts</h3>
             <div className="shirt-images">
-              <img src={summerImage1} alt="Summer Shirt 1" className="shirt-image" />
-              <img src={summerImage2} alt="Summer Shirt 2" className="shirt-image" />
-              <img src={summerImage3} alt="Summer Shirt 3" className="shirt-image" />
-              <img src={summerImage4} alt="Summer Shirt 4" className="shirt-image" />
+              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
+                <img src={summerImage1} alt="Summer Shirt 1" className="shirt-image" />
+              </a>
+              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
+                <img src={summerImage2} alt="Summer Shirt 2" className="shirt-image" />
+              </a>
+              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
+                <img src={summerImage3} alt="Summer Shirt 3" className="shirt-image" />
+              </a>
+              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
+                <img src={summerImage4} alt="Summer Shirt 4" className="shirt-image" />
+              </a>
             </div>
           </div>
         )}
