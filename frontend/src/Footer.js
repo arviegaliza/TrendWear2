@@ -22,7 +22,8 @@ function Footer() {
               Web Development
             </td>
             <td className="footer-item">
-              +639 5082 1323    </td>
+              +639 5082 1323    
+              </td>
             <td className="footer-item">
               trendwear@gmail.com
             </td>

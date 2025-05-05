@@ -703,9 +703,8 @@
     background-color: #c9302c;
 }
 
-
 .title {
-    font-family: 'Pacifico', cursive; /* Stylish cursive font */
+    font-family: 'Pacifico', cursive;
     font-size: 32px;
     font-weight: bold;
     text-align: center;
@@ -718,6 +717,12 @@
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  .title.fade-out {
+    opacity: 0;
   }
   
   
