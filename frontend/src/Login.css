@@ -836,11 +836,11 @@ button.summer:hover {
   
   .outfit-page {
     position: relative;
-    background-image: url('./assets/Mainbgdd.jpg');
-    background-size: cover;
+    background-image: url('./assets/outfitbg.jpg');
+    background-size: cover; 
     background-position: center;
     background-repeat: no-repeat;
-    min-height: 100vh;
+    min-height: 50vh;
   }
   
   
