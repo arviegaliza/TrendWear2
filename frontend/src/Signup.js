@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './Login.css';
@@ -11,20 +11,21 @@ function Signup() {
     password: '',
   });
 
-  const [errorMessage, setErrorMessage] = useState(''); // To store any error messages
-  const navigate = useNavigate(); // Hook for navigation
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
+  // Handle input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessage(''); // Reset any previous error message
+    setErrorMessage('');
 
     try {
       const response = await axios.post('http://localhost:8081/signup', formData);
-      console.log('Response:', response);
 
       if (response.status === 200) {
         alert('Signup successful');
@@ -34,10 +35,9 @@ function Signup() {
       }
     } catch (error) {
       console.error('Error signing up:', error);
-      
-      // Check for specific error from the server
-      if (error.response && error.response.data && error.response.data.error) {
-        setErrorMessage(error.response.data.error); // Set the error message
+
+      if (error.response?.data?.error) {
+        setErrorMessage(error.response.data.error);
       } else {
         setErrorMessage('An error occurred. Please check your connection and try again.');
       }
@@ -49,12 +49,14 @@ function Signup() {
       <form className="login-form" onSubmit={handleSubmit}>
         <h3 className="signup-title">Sign Up</h3>
 
-        {/* Display error message if there is one */}
+        {/* Error message */}
         {errorMessage && <div className="error-message">{errorMessage}</div>}
 
-        {/* Name Field */}
+        {/* Name */}
         <div className="mb-3 input-group">
-          <span className="input-group-text"><i className="fas fa-user"></i></span>
+          <span className="input-group-text">
+            <i className="fas fa-user"></i>
+          </span>
           <input
             type="text"
             id="name"
@@ -67,9 +69,11 @@ function Signup() {
           <label htmlFor="name" className="floating-label">Enter Name</label>
         </div>
 
-        {/* Email Field */}
+        {/* Email */}
         <div className="mb-3 input-group">
-          <span className="input-group-text"><i className="fas fa-envelope"></i></span>
+          <span className="input-group-text">
+            <i className="fas fa-envelope"></i>
+          </span>
           <input
             type="email"
             id="email"
@@ -82,9 +86,11 @@ function Signup() {
           <label htmlFor="email" className="floating-label">Enter Email</label>
         </div>
 
-        {/* Password Field */}
+        {/* Password */}
         <div className="mb-3 input-group">
-          <span className="input-group-text"><i className="fas fa-lock"></i></span>
+          <span className="input-group-text">
+            <i className="fas fa-lock"></i>
+          </span>
           <input
             type="password"
             id="password"
@@ -97,12 +103,12 @@ function Signup() {
           <label htmlFor="password" className="floating-label">Enter Password</label>
         </div>
 
-        {/* Sign Up Button */}
+        {/* Submit */}
         <button type="submit" className="custom-btn">
           <i className="fas fa-user-plus"></i> <strong>Sign Up</strong>
         </button>
 
-        {/* Login Link */}
+        {/* Login link */}
         <Link to="/" className="btn btn-default text-decoration-none">
           <i className="fas fa-sign-in-alt"></i> Login
         </Link>

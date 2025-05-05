@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios'; // For making API requests
+import axios from 'axios';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './Login.css';
 
@@ -11,18 +11,17 @@ function ForgotPassword() {
     newPassword: '',
   });
 
+  // Handle input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // Make API request to the correct endpoint
       const response = await axios.post('http://localhost:8081/forgot-password', formData);
-
-      console.log('Response:', response);
 
       if (response.status === 200) {
         alert('Password reset successful');
@@ -40,9 +39,11 @@ function ForgotPassword() {
       <form className="login-form" onSubmit={handleSubmit}>
         <h3 className="signup-title">Reset Password</h3>
 
-        {/* Email Field */}
+        {/* Email */}
         <div className="mb-3 input-group">
-          <span className="input-group-text"><i className="fas fa-envelope"></i></span>
+          <span className="input-group-text">
+            <i className="fas fa-envelope"></i>
+          </span>
           <input
             type="email"
             id="email"
@@ -55,9 +56,11 @@ function ForgotPassword() {
           <label htmlFor="email" className="floating-label">Enter Your Email</label>
         </div>
 
-        {/* Current Password Field */}
+        {/* Current Password */}
         <div className="mb-3 input-group">
-          <span className="input-group-text"><i className="fas fa-lock"></i></span>
+          <span className="input-group-text">
+            <i className="fas fa-lock"></i>
+          </span>
           <input
             type="password"
             id="currentPassword"
@@ -70,9 +73,11 @@ function ForgotPassword() {
           <label htmlFor="currentPassword" className="floating-label">Enter Current Password</label>
         </div>
 
-        {/* New Password Field */}
+        {/* New Password */}
         <div className="mb-3 input-group">
-          <span className="input-group-text"><i className="fas fa-key"></i></span>
+          <span className="input-group-text">
+            <i className="fas fa-key"></i>
+          </span>
           <input
             type="password"
             id="newPassword"
@@ -85,7 +90,7 @@ function ForgotPassword() {
           <label htmlFor="newPassword" className="floating-label">Enter New Password</label>
         </div>
 
-        {/* Submit Button */}
+        {/* Submit */}
         <button type="submit" className="custom-btn">
           <i className="fas fa-paper-plane"></i> Reset Password
         </button>
