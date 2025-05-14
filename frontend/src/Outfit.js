@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css'; 
 
 // Assets
 import casualImage from './assets/casual/shirt1.png';
@@ -20,7 +20,6 @@ import summerImage4 from './assets/summer/summer4.png';
 function Outfit() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [titleVisible, setTitleVisible] = useState(true); // NEW state
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -28,23 +27,12 @@ function Outfit() {
   };
 
   const handleCategorySelect = (category) => {
-    // First trigger fade-out
-    setTitleVisible(false);
-    // After fade-out completes, set the category
-    setTimeout(() => {
-      setSelectedCategory(category);
-    }, 500); // Match the transition time in CSS
-  };
-
-  const handleBack = () => {
-    setSelectedCategory(null);
-    setTimeout(() => {
-      setTitleVisible(true); // Fade title back in
-    }, 0); // Instant re-show; fade handled via CSS
+    setSelectedCategory(category);
   };
 
   return (
     <div className="outfit-page">
+      
       {/* Sidebar */}
       <div className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
         <button className="close-btn" onClick={() => setSidebarOpen(false)}>
@@ -71,7 +59,7 @@ function Outfit() {
 
       {/* Content */}
       <div className="container">
-        <div className={`title ${!titleVisible ? 'fade-out' : ''}`}>Outfit</div>
+        <div className="title">Outfit</div>
 
         {/* Show categories if none selected */}
         {selectedCategory === null && (
@@ -105,7 +93,7 @@ function Outfit() {
 
         {/* Back Button */}
         {selectedCategory && (
-          <button className="back-btn" onClick={handleBack}>
+          <button className="back-btn" onClick={() => setSelectedCategory(null)}>
             <i className="fas fa-arrow-left"></i>
           </button>
         )}
