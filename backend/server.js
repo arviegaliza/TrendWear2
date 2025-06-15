@@ -7,8 +7,13 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 8081;
 
-// Middleware
-app.use(cors());
+// CORS - allow your frontend domain only (change accordingly)
+app.use(cors({
+  origin: process.env.FRONTEND_URL || '*', // Replace '*' with your React app URL in production
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+}));
+
 app.use(express.json());
 
 // MySQL connection pool
@@ -18,7 +23,7 @@ const pool = mysql.createPool({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  port: process.env.DB_PORT || 3307,
+  port: process.env.DB_PORT ? Number(process.env.DB_PORT) : 3307,
   ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: true } : undefined
 });
 
@@ -53,7 +58,7 @@ app.post('/signup', (req, res) => {
         [name, email, hashedPassword],
         (err) => {
           if (err) return res.status(500).json({ success: false, message: "Error creating user" });
-          res.status(200).json({ success: true, message: "Signup successful" });
+          return res.status(200).json({ success: true, message: "Signup successful" });
         }
       );
     });
@@ -77,9 +82,9 @@ app.post('/login', (req, res) => {
       if (err) return res.status(500).json({ success: false, message: "Password comparison error" });
 
       if (isMatch) {
-        res.status(200).json({ success: true, message: "Login successful" });
+        return res.status(200).json({ success: true, message: "Login successful" });
       } else {
-        res.status(400).json({ success: false, message: "Incorrect password" });
+        return res.status(400).json({ success: false, message: "Incorrect password" });
       }
     });
   });
@@ -106,7 +111,7 @@ app.post('/forgot-password', (req, res) => {
         [hashedPassword, email],
         (err) => {
           if (err) return res.status(500).json({ success: false, message: "Error updating password" });
-          res.json({ success: true, message: "✅ Password reset successful!" });
+          return res.json({ success: true, message: "✅ Password reset successful!" });
         }
       );
     });

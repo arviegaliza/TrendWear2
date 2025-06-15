@@ -25,7 +25,7 @@ function Signup() {
     setErrorMessage('');
 
     try {
-      const response = await axios.post('http://localhost:8081/signup', formData);
+      const response = await axios.post('https://trendwear2.onrender.com/signup', formData);
 
       if (response.status === 200) {
         alert('Signup successful');
