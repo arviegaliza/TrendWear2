@@ -2,7 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
-require('dotenv').config(); // Load environment variables
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 8081;
@@ -11,20 +11,16 @@ const PORT = process.env.PORT || 8081;
 app.use(cors());
 app.use(express.json());
 
-// MySQL connection pool (LOCALHOST version)
+// MySQL connection pool
 const pool = mysql.createPool({
   connectionLimit: 10,
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  port: process.env.DB_PORT,
-
-  ssl: {
-    rejectUnauthorized: true
-  }
+  port: process.env.DB_PORT || 3307,
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: true } : undefined
 });
-
 
 // Check MySQL connection
 pool.getConnection((err, connection) => {
@@ -41,23 +37,23 @@ app.post('/signup', (req, res) => {
   const { name, email, password } = req.body;
 
   if (!name || !email || !password)
-    return res.status(400).json({ error: "All fields are required." });
+    return res.status(400).json({ success: false, message: "All fields are required." });
 
   pool.query("SELECT * FROM login WHERE email = ?", [email], (err, results) => {
-    if (err) return res.status(500).json({ error: "Database error" });
+    if (err) return res.status(500).json({ success: false, message: "Database error" });
 
     if (results.length > 0)
-      return res.status(400).json({ error: "Email already registered." });
+      return res.status(400).json({ success: false, message: "Email already registered." });
 
     bcrypt.hash(password, 10, (err, hashedPassword) => {
-      if (err) return res.status(500).json({ error: "Password hashing error" });
+      if (err) return res.status(500).json({ success: false, message: "Password hashing error" });
 
       pool.query(
         "INSERT INTO login (name, email, password) VALUES (?, ?, ?)",
         [name, email, hashedPassword],
         (err) => {
-          if (err) return res.status(500).json({ error: "Error creating user" });
-          res.status(200).json({ message: "Signup successful" });
+          if (err) return res.status(500).json({ success: false, message: "Error creating user" });
+          res.status(200).json({ success: true, message: "Signup successful" });
         }
       );
     });
@@ -69,21 +65,21 @@ app.post('/login', (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password)
-    return res.status(400).json({ error: "Email and password required." });
+    return res.status(400).json({ success: false, message: "Email and password required." });
 
   pool.query("SELECT * FROM login WHERE email = ?", [email], (err, results) => {
-    if (err) return res.status(500).json({ error: "Database error" });
+    if (err) return res.status(500).json({ success: false, message: "Database error" });
 
     if (results.length === 0)
-      return res.status(404).json({ error: "User not found" });
+      return res.status(404).json({ success: false, message: "User not found" });
 
     bcrypt.compare(password, results[0].password, (err, isMatch) => {
-      if (err) return res.status(500).json({ error: "Password comparison error" });
+      if (err) return res.status(500).json({ success: false, message: "Password comparison error" });
 
       if (isMatch) {
-        res.status(200).json({ message: "Login successful" });
+        res.status(200).json({ success: true, message: "Login successful" });
       } else {
-        res.status(400).json({ error: "Incorrect password" });
+        res.status(400).json({ success: false, message: "Incorrect password" });
       }
     });
   });
@@ -94,33 +90,35 @@ app.post('/forgot-password', (req, res) => {
   const { email, newPassword } = req.body;
 
   if (!email || !newPassword)
-    return res.status(400).json({ error: "Email and new password required." });
+    return res.status(400).json({ success: false, message: "Email and new password required." });
 
   pool.query("SELECT * FROM login WHERE email = ?", [email], (err, results) => {
-    if (err) return res.status(500).json({ error: "Database error" });
+    if (err) return res.status(500).json({ success: false, message: "Database error" });
 
     if (results.length === 0)
-      return res.status(404).json({ error: "User not found" });
+      return res.status(404).json({ success: false, message: "User not found" });
 
     bcrypt.hash(newPassword, 10, (err, hashedPassword) => {
-      if (err) return res.status(500).json({ error: "Password hashing error" });
+      if (err) return res.status(500).json({ success: false, message: "Password hashing error" });
 
       pool.query(
         "UPDATE login SET password = ? WHERE email = ?",
         [hashedPassword, email],
         (err) => {
-          if (err) return res.status(500).json({ error: "Error updating password" });
-          res.json({ message: "✅ Password reset successful!" });
+          if (err) return res.status(500).json({ success: false, message: "Error updating password" });
+          res.json({ success: true, message: "✅ Password reset successful!" });
         }
       );
     });
   });
 });
+
+// ----------------- ROOT -----------------
 app.get('/', (req, res) => {
   res.send('✅ TrendWear Backend is Running');
 });
 
-// START SERVER
+// ----------------- START SERVER -----------------
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on port ${PORT}`);
 });
