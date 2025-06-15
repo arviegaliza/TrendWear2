@@ -110,6 +110,9 @@ app.post('/forgot-password', (req, res) => {
     });
   });
 });
+app.get('/', (req, res) => {
+  res.send('✅ TrendWear Backend is Running');
+});
 
 // START SERVER
 app.listen(PORT, () => {
