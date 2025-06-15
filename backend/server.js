@@ -10,18 +10,20 @@ const PORT = process.env.PORT || 8081;
 app.use(cors());
 app.use(express.json());
 
-// MySQL Connection Pool
+
+require('dotenv').config(); // at the top of file
+
 const pool = mysql.createPool({
-    connectionLimit: 200,
-    host: 'localhost',
-    user: 'root',
-    password: 'admingwapo12345',
-    database: 'signup',
-    port: 3307,
-     ssl: {
-    rejectUnauthorized: true,  // 👈 Enables verification of certificate and hostname
-  },
+  connectionLimit: 10,
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  ssl: {
+    rejectUnauthorized: true
+  }
 });
+
 
 // Check MySQL Connection
 pool.getConnection((err, connection) => {
