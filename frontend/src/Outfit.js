@@ -4,18 +4,19 @@ import { Link, useNavigate } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css'; 
 
 // Assets
-import casualImage from './assets/casual/shirt1.png';
-import casualShirt2 from './assets/casual/shirt2.png';
-import casualShirt3 from './assets/casual/shirt3.png';
-import casualShirt4 from './assets/casual/shirt4.png';
-import formalImage1 from './assets/formal/formal1.png';
-import formalImage2 from './assets/formal/formal2.png';
-import formalImage3 from './assets/formal/formal3.png';
-import formalImage4 from './assets/formal/formal4.png';
-import summerImage1 from './assets/summer/summer1.png';
-import summerImage2 from './assets/summer/summer2.png';
-import summerImage3 from './assets/summer/summer3.png';
-import summerImage4 from './assets/summer/summer4.png';
+import casualImage1 from './assets/Casual/shirt1.webp';
+import casualImage2 from './assets/Casual/shirt2.webp';
+import casualImage3 from './assets/Casual/shirt3.webp';
+import casualImage4 from './assets/Casual/shirt4.webp';
+
+import formalImage1 from './assets/Formal/formal1.webp';
+import formalImage2 from './assets/Formal/formal2.webp';
+import formalImage3 from './assets/Formal/formal3.webp';
+import formalImage4 from './assets/Formal/formal4.webp';
+import summerImage1 from './assets/Summer/summer1.webp';
+import summerImage2 from './assets/Summer/summer2.webp';
+import summerImage3 from './assets/Summer/summer3.webp';
+import summerImage4 from './assets/Summer/summer4.webp';
 
 function Outfit() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -68,7 +69,7 @@ function Outfit() {
               <tbody>
                 <tr>
                   <td>
-                    <img src={casualImage} alt="Casual Outfit" className="category-image" />
+                    <img src={casualImage1} alt="Casual Outfit" className="category-image" />
                     <button className="casual" onClick={() => handleCategorySelect('casual')}>
                       CASUAL
                     </button>
@@ -98,64 +99,79 @@ function Outfit() {
           </button>
         )}
 
-        {/* Casual Shirts */}
-        {selectedCategory === 'casual' && (
-          <div className="shirts-display">
-            <h3>Casual Shirts</h3>
-            <div className="shirt-images">
-              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
-                <img src={casualImage} alt="Casual Shirt 1" className="shirt-image" />
-              </a>
-              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
-                <img src={casualShirt2} alt="Casual Shirt 2" className="shirt-image" />
-              </a>
-              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
-                <img src={casualShirt3} alt="Casual Shirt 3" className="shirt-image" />
-              </a>
-              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
-                <img src={casualShirt4} alt="Casual Shirt 4" className="shirt-image" />
-              </a>
-            </div>
-          </div>
-        )}
+       {selectedCategory === 'casual' && (
+  <div className="shirts-display">
+    <h3>Casual Shirts</h3>
+    <div className="shirt-images">
+      <a href="https://ph.shp.ee/1fF53Fj" target="_blank" rel="noopener noreferrer">
+        <img src={casualImage1} alt="Casual Shirt 1" className="shirt-image" />
+        <p className="shirt-name">Women Casual Work Solid V-Neck Blouses</p>
+      </a>
+      <a href="https://ph.shp.ee/1fF53Fj" target="_blank" rel="noopener noreferrer">
+        <img src={casualImage2} alt="Casual Shirt 2" className="shirt-image" />
+        <p className="shirt-name">Women Vintage back waist Elastic Flared Pants  </p>
+      </a>
+      <a href="https://ph.shp.ee/1fF53Fj" target="_blank" rel="noopener noreferrer">
+        <img src={casualImage3} alt="Casual Shirt 3" className="shirt-image" />
+        <p className="shirt-name">Women Vintage Fashion Shrunken Pleats Lnatern Sleeves</p>
+      </a>
+      <a href="https://ph.shp.ee/1fF53Fj" target="_blank" rel="noopener noreferrer">
+        <img src={casualImage4} alt="Casual Shirt 4" className="shirt-image" />
+        <p className="shirt-name">Stylish V-Neck Summer Blouse</p>
+      </a>
+    </div>
+  </div>
+)}
 
-        {/* Formal Shirts */}
-        {selectedCategory === 'formal' && (
-          <div className="shirts-display">
-            <h3>Formal Shirts</h3>
-            <div className="shirt-images">
-              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
-                <img src={formalImage1} alt="Formal Shirt 1" className="shirt-image" />
-              </a>
-              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
-                <img src={formalImage2} alt="Formal Shirt 2" className="shirt-image" />
-              </a>
-              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
-                <img src={formalImage3} alt="Formal Shirt 3" className="shirt-image" />
-              </a>
-              <a href="https://shopee.ph/ZANZEA-Women-European-Party-Elegant-Half-Puff-Sleeve-Waist-A-Hem-Dress-i.209378306.19366867136?sp_atk=6e31c05b-564b-440d-95fd-3b20d3eef51f&xptdk=6e31c05b-564b-440d-95fd-3b20d3eef51f" target="_blank" rel="noopener noreferrer">
-                <img src={formalImage4} alt="Formal Shirt 4" className="shirt-image" />
-              </a>
-            </div>
-          </div>
-        )}
+{/* Formal Shirts */}
+{selectedCategory === 'formal' && (
+  <div className="shirts-display">
+    <h3>Formal Shirts</h3>
+    <div className="shirt-images">
+      <a href="https://ph.shp.ee/VpUdgxX" target="_blank" rel="noopener noreferrer">
+        <img src={formalImage1} alt="Formal Shirt 1" className="shirt-image" />
+        <p className="shirt-name">Women Office Fashion Short Sleeve</p>
+      </a>
+      <a href="https://ph.shp.ee/VpUdgxX" target="_blank" rel="noopener noreferrer">
+        <img src={formalImage2} alt="Formal Shirt 2" className="shirt-image" />
+        <p className="shirt-name">Off-Shoulder Ruffle Midi Dress</p>
+      </a>
+      <a href="https://ph.shp.ee/VpUdgxX" target="_blank" rel="noopener noreferrer">
+        <img src={formalImage3} alt="Formal Shirt 3" className="shirt-image" />
+        <p className="shirt-name">Women's Long Sleeve Button Down Shirt</p>
+      </a>
+      <a
+        href="https://ph.shp.ee/VpUdgxX" target="_blank" rel="noopener noreferrer">
+        <img src={formalImage4} alt="Formal Shirt 4" className="shirt-image" />
+        <p className="shirt-name">Women's Formal Solid Color Blouse</p>
+      </a>
+    </div>
+  </div>
+)}
 
         {/* Summer Shirts */}
         {selectedCategory === 'summer' && (
           <div className="shirts-display">
             <h3>Summer Shirts</h3>
             <div className="shirt-images">
-              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
+              <a href="https://ph.shp.ee/VpUdgxX" target="_blank" rel="noopener noreferrer">
                 <img src={summerImage1} alt="Summer Shirt 1" className="shirt-image" />
+                  <p className="shirt-name">Women Boho Floral Flowers Dress</p>
               </a>
-              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
+              <a href="https://ph.shp.ee/VpUdgxX" target="_blank" rel="noopener noreferrer">
                 <img src={summerImage2} alt="Summer Shirt 2" className="shirt-image" />
+                  <p className="shirt-name">Women Boho Tribal Print Smoked Tie Front Pattern Dress</p>
+
               </a>
-              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
+              <a href="https://ph.shp.ee/VpUdgxX" target="_blank" rel="noopener noreferrer">
                 <img src={summerImage3} alt="Summer Shirt 3" className="shirt-image" />
+                  <p className="shirt-name">Women Modest Plain Tie Front Blouse </p>
+
               </a>
-              <a href="https://shopee.ph" target="_blank" rel="noopener noreferrer">
+              <a href="https://ph.shp.ee/VpUdgxX" target="_blank" rel="noopener noreferrer">
                 <img src={summerImage4} alt="Summer Shirt 4" className="shirt-image" />
+                  <p className="shirt-name">Women Loose Summer O Neck Daily Sleeve</p>
+
               </a>
             </div>
           </div>

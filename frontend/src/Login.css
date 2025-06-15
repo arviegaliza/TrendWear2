@@ -427,7 +427,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 1.5em;
+    font-size: 2.0em;
     font-weight: bold;
     color: black;
     font-family: "Sigmar", serif;
@@ -547,7 +547,7 @@
     width: 100%;                  
     text-align: center;
     padding: 10px 0;            
-    background-color: #f1f1f1;  
+    background-color:white;  
     border-top: 1px solid #ccc;  
     box-sizing: border-box;      
 }
@@ -575,7 +575,7 @@
 
 /* Hover effect on footer items */
 .footer-item:hover {
-    background-color: #f7f7f7;    
+    background-color: none;
 }
 
 /* Optional: Additional styling for mobile responsiveness */
@@ -905,49 +905,83 @@ button.summer:hover {
       -webkit-transform: rotateY(0deg);
     }
   }
-  
-  .shirt-image {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-  }
-  
-  .shirt-image:hover {
-    transform: scale(1.1);
-  }
-  
-  button {
-    margin-top: 15px;
-    padding: 12px 25px;
-    font-size: 18px;
-    border-radius: 8px;
-  }
-  
-  .category-image {
-    width: 260px;
-    height: 280px;
-    object-fit: cover;
-    margin-bottom: 1px;
-  }
-  .back-btn {
-    display: flex;
-    justify-content: flex-end;
-    margin-left: auto;
-    margin-bottom: 30px;
-    padding: 10px 18px;
-    font-size: 18px;
-    border-radius: 8px;
-    background-color: #f0f0f0;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .back-btn:hover {
-    background-color: #ddd;
-  }
-  
+  /* Shirt image styling */
+.shirt-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
 
-  
+.shirt-image:hover {
+  transform: scale(1.1);
+}
+
+/* Category images in the category selection table */
+.category-image {
+  width: 260px;
+  height: 280px;
+  object-fit: cover;
+  margin-bottom: 1px;
+}
+
+/* Buttons (e.g., category, back) */
+button {
+  margin-top: 15px;
+  padding: 12px 25px;
+  font-size: 18px;
+  border-radius: 8px;
+}
+
+.back-btn {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+  margin-bottom: 30px;
+  padding: 10px 18px;
+  font-size: 18px;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.back-btn:hover {
+  background-color: #ddd;
+}
+
+/* Shirt container row */
+.shirt-images {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-bottom: 20px;
+}
+
+/* Each image + name wrapper */
+.shirt-images a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  position: relative;
+  width: 200px; /* match shirt image width */
+}
+
+/* Shirt name below image (initially hidden) */
+.shirt-name {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  font-size: 14px;
+  margin-top: 8px;
+  color: #333;
+}
+
+/* Show name on hover */
+.shirt-images a:hover .shirt-name {
+  opacity: 1;
+}
