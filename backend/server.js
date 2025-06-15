@@ -11,29 +11,24 @@ const PORT = process.env.PORT || 8081;
 app.use(cors());
 app.use(express.json());
 
-// MySQL connection pool
+// MySQL connection pool (LOCALHOST version)
 const pool = mysql.createPool({
   connectionLimit: 10,
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  ssl: {
-    rejectUnauthorized: true
-  }
+  database: process.env.DB_NAME
 });
 
 // Check MySQL connection
 pool.getConnection((err, connection) => {
   if (err) {
-    console.error('❌ Database connection failed:', err.message);
+    console.error('❌ Database connection failed:', err);
   } else {
     console.log('✅ Connected to MySQL database!');
     connection.release();
   }
 });
-
-// ROUTES
 
 // ----------------- SIGNUP -----------------
 app.post('/signup', (req, res) => {
