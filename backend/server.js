@@ -18,6 +18,9 @@ const pool = mysql.createPool({
     password: 'admingwapo12345',
     database: 'signup',
     port: 3307,
+     ssl: {
+    rejectUnauthorized: true,  // 👈 Enables verification of certificate and hostname
+  },
 });
 
 // Check MySQL Connection
