@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
+require('dotenv').config(); // Load environment variables
 
 const app = express();
 const PORT = process.env.PORT || 8081;
@@ -10,9 +11,7 @@ const PORT = process.env.PORT || 8081;
 app.use(cors());
 app.use(express.json());
 
-
-require('dotenv').config(); // at the top of file
-
+// MySQL connection pool
 const pool = mysql.createPool({
   connectionLimit: 10,
   host: process.env.DB_HOST,
@@ -24,147 +23,100 @@ const pool = mysql.createPool({
   }
 });
 
-
-// Check MySQL Connection
+// Check MySQL connection
 pool.getConnection((err, connection) => {
-    if (err) {
-        console.error('❌ Database connection failed:', err.message);
-    } else {
-        console.log('✅ Connected to MySQL database!');
-        connection.release();
-    }
+  if (err) {
+    console.error('❌ Database connection failed:', err.message);
+  } else {
+    console.log('✅ Connected to MySQL database!');
+    connection.release();
+  }
 });
 
-// Handle Sign Up
-const signupUser = (req, res) => {
-    const { name, email, password } = req.body;
+// ROUTES
 
-    if (!name || !email || !password) {
-        return res.status(400).json({ error: "Name, email, and password are required!" });
-    }
+// ----------------- SIGNUP -----------------
+app.post('/signup', (req, res) => {
+  const { name, email, password } = req.body;
 
-    // Check if email already exists in the database
-    const checkEmailQuery = "SELECT * FROM login WHERE email = ?";
-    console.log("Checking email:", email);  // Log the email being checked
-    pool.query(checkEmailQuery, [email], (err, results) => {
-        if (err) {
-            console.error("❌ Error checking email:", err);
-            return res.status(500).json({ error: "Database error" });
+  if (!name || !email || !password)
+    return res.status(400).json({ error: "All fields are required." });
+
+  pool.query("SELECT * FROM login WHERE email = ?", [email], (err, results) => {
+    if (err) return res.status(500).json({ error: "Database error" });
+
+    if (results.length > 0)
+      return res.status(400).json({ error: "Email already registered." });
+
+    bcrypt.hash(password, 10, (err, hashedPassword) => {
+      if (err) return res.status(500).json({ error: "Password hashing error" });
+
+      pool.query(
+        "INSERT INTO login (name, email, password) VALUES (?, ?, ?)",
+        [name, email, hashedPassword],
+        (err) => {
+          if (err) return res.status(500).json({ error: "Error creating user" });
+          res.status(200).json({ message: "Signup successful" });
         }
-
-        console.log("Email check results:", results); // Log the results of the query
-
-        // If email already exists, return error response and don't proceed with user insertion
-        if (results.length > 0) {
-            return res.status(400).json({ error: "Email is already registered" });
-        }
-
-        // Proceed to the rest of the logic if the email doesn't exist
-        bcrypt.hash(password, 10, (err, hashedPassword) => {
-            if (err) {
-                console.error("❌ Error hashing password:", err);
-                return res.status(500).json({ error: "Error hashing password" });
-            }
-
-            // Insert the new user into the database
-            const insertQuery = "INSERT INTO login (name, email, password) VALUES (?, ?, ?)";
-            pool.query(insertQuery, [name, email, hashedPassword], (err, result) => {
-                if (err) {
-                    console.error("❌ Error inserting user:", err);
-                    return res.status(500).json({ error: "Error inserting user into database" });
-                }
-
-                // Respond with success once user is inserted
-                return res.status(200).json({ message: "Signup successful" });
-            });
-        });
+      );
     });
-};
+  });
+});
 
-   
-// Handle Login
-const loginUser = (req, res) => {
-    const { email, password } = req.body;
+// ----------------- LOGIN -----------------
+app.post('/login', (req, res) => {
+  const { email, password } = req.body;
 
-    if (!email || !password) {
-        return res.status(400).json({ error: "Email and password are required!" });
-    }
+  if (!email || !password)
+    return res.status(400).json({ error: "Email and password required." });
 
-    // Check if user exists in the database
-    const sql = "SELECT * FROM login WHERE email = ?";
-    pool.query(sql, [email], (err, results) => {
-        if (err) {
-            console.error("❌ Error checking user:", err);
-            return res.status(500).json({ error: "Database error" });
-        }
+  pool.query("SELECT * FROM login WHERE email = ?", [email], (err, results) => {
+    if (err) return res.status(500).json({ error: "Database error" });
 
-        if (results.length === 0) {
-            return res.status(404).json({ error: "User not found" });
-        }
+    if (results.length === 0)
+      return res.status(404).json({ error: "User not found" });
 
-        // Compare the hashed password with the one stored in the database
-        bcrypt.compare(password, results[0].password, (err, isMatch) => {
-            if (err) {
-                console.error("❌ Error comparing passwords:", err);
-                return res.status(500).json({ error: "Error processing password" });
-            }
+    bcrypt.compare(password, results[0].password, (err, isMatch) => {
+      if (err) return res.status(500).json({ error: "Password comparison error" });
 
-            if (isMatch) {
-                return res.status(200).json({ message: "Login successful" });
-            } else {
-                return res.status(400).json({ error: "Incorrect password" });
-            }
-        });
+      if (isMatch) {
+        res.status(200).json({ message: "Login successful" });
+      } else {
+        res.status(400).json({ error: "Incorrect password" });
+      }
     });
-};
+  });
+});
 
-// Handle Forgot Password
-const forgotPassword = (req, res) => {
-    const { email, newPassword } = req.body;
+// ----------------- FORGOT PASSWORD -----------------
+app.post('/forgot-password', (req, res) => {
+  const { email, newPassword } = req.body;
 
-    if (!email || !newPassword) {
-        return res.status(400).json({ error: "Email and new password are required!" });
-    }
+  if (!email || !newPassword)
+    return res.status(400).json({ error: "Email and new password required." });
 
-    // Check if user exists in the database
-    const sql = "SELECT * FROM login WHERE email = ?";
-    pool.query(sql, [email], (err, results) => {
-        if (err) {
-            console.error("❌ Error checking user:", err);
-            return res.status(500).json({ error: "Database error" });
+  pool.query("SELECT * FROM login WHERE email = ?", [email], (err, results) => {
+    if (err) return res.status(500).json({ error: "Database error" });
+
+    if (results.length === 0)
+      return res.status(404).json({ error: "User not found" });
+
+    bcrypt.hash(newPassword, 10, (err, hashedPassword) => {
+      if (err) return res.status(500).json({ error: "Password hashing error" });
+
+      pool.query(
+        "UPDATE login SET password = ? WHERE email = ?",
+        [hashedPassword, email],
+        (err) => {
+          if (err) return res.status(500).json({ error: "Error updating password" });
+          res.json({ message: "✅ Password reset successful!" });
         }
-
-        if (results.length === 0) {
-            return res.status(404).json({ error: "User not found" });
-        }
-
-        // Hash the new password and update it in the database
-        bcrypt.hash(newPassword, 10, (err, hashedNewPassword) => {
-            if (err) {
-                console.error("❌ Error hashing new password:", err);
-                return res.status(500).json({ error: "Error resetting password" });
-            }
-
-            // Update password in the database
-            const updateSql = "UPDATE login SET password = ? WHERE email = ?";
-            pool.query(updateSql, [hashedNewPassword, email], (err, data) => {
-                if (err) {
-                    console.error("❌ Error updating password:", err);
-                    return res.status(500).json({ error: "Error updating password" });
-                }
-
-                return res.json({ message: "✅ Password reset successful!" });
-            });
-        });
+      );
     });
-};
+  });
+});
 
-// Define Routes
-app.post('/signup', signupUser);
-app.post('/login', loginUser);
-app.post('/forgot-password', forgotPassword);
-
-// Start Server
+// START SERVER
 app.listen(PORT, () => {
-    console.log(`🚀 Server is running on port ${PORT}`);
+  console.log(`🚀 Server is running on port ${PORT}`);
 });
